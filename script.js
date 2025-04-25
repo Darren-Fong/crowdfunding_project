@@ -16,60 +16,67 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Progress Circle Animation
-const progressBar = document.querySelector('.progress-bar');
-const percentage = document.querySelector('.percentage');
-const currentAmount = 0;
-const targetAmount = 100000;
+// Progress Circle Animation (only on progress page)
+if (document.querySelector('.progress-circle')) {
+    const progressBar = document.querySelector('.progress-bar');
+    const percentage = document.querySelector('.percentage');
+    const currentAmount = 0;
+    const targetAmount = 100000;
 
-function updateProgress() {
-    const progress = (currentAmount / targetAmount) * 100;
-    const angle = (progress / 100) * 360;
-    
-    progressBar.style.background = `conic-gradient(var(--primary-color) ${angle}deg, transparent ${angle}deg)`;
-    percentage.textContent = `${Math.round(progress)}%`;
+    function updateProgress() {
+        const progress = (currentAmount / targetAmount) * 100;
+        const angle = (progress / 100) * 360;
+        
+        progressBar.style.background = `conic-gradient(var(--primary-color) ${angle}deg, transparent ${angle}deg)`;
+        percentage.textContent = `${Math.round(progress)}%`;
+    }
+
+    // Animate progress on scroll
+    const progressSection = document.querySelector('.progress');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                updateProgress();
+            }
+        });
+    }, { threshold: 0.5 });
+
+    observer.observe(progressSection);
 }
 
-// Animate progress on scroll
-const progressSection = document.querySelector('.progress');
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            updateProgress();
-        }
-    });
-}, { threshold: 0.5 });
-
-observer.observe(progressSection);
-
-// Form Submission
+// Form Submission (only on contact page)
 const contactForm = document.querySelector('.contact-form');
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    // Get form data
-    const formData = new FormData(contactForm);
-    const data = Object.fromEntries(formData);
-    
-    // Here you would typically send the data to a server
-    console.log('Form submitted:', data);
-    
-    // Show success message
-    alert('Thank you for your message! We will get back to you soon.');
-    contactForm.reset();
-});
-
-// Backer Tier Selection
-document.querySelectorAll('.select-button').forEach(button => {
-    button.addEventListener('click', () => {
-        const tier = button.closest('.tier');
-        const title = tier.querySelector('h3').textContent;
-        const price = tier.querySelector('.price').textContent;
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
         
-        // Here you would typically redirect to a payment page
-        alert(`You selected the ${title} tier for ${price}`);
+        // Get form data
+        const formData = new FormData(contactForm);
+        const data = Object.fromEntries(formData);
+        
+        // Here you would typically send the data to a server
+        console.log('Form submitted:', data);
+        
+        // Show success message
+        alert('Thank you for your message! We will get back to you soon.');
+        contactForm.reset();
     });
-});
+}
+
+// Backer Tier Selection (only on progress page)
+const selectButtons = document.querySelectorAll('.select-button');
+if (selectButtons.length > 0) {
+    selectButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const tier = button.closest('.tier');
+            const title = tier.querySelector('h3').textContent;
+            const price = tier.querySelector('.price').textContent;
+            
+            // Here you would typically redirect to a payment page
+            alert(`You selected the ${title} tier for ${price}`);
+        });
+    });
+}
 
 // Scroll Animation
 const sections = document.querySelectorAll('section');
@@ -93,4 +100,14 @@ window.addEventListener('scroll', () => {
             link.classList.add('active');
         }
     });
+});
+
+// Add active class to current page in navigation
+const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+const navLinks = document.querySelectorAll('.nav-links a');
+
+navLinks.forEach(link => {
+    if (link.getAttribute('href') === currentPage) {
+        link.classList.add('active');
+    }
 }); 

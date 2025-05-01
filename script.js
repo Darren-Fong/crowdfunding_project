@@ -575,4 +575,26 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Video is paused');
         });
     }
+});
+
+// Video player debugging
+document.addEventListener('DOMContentLoaded', function() {
+    const video = document.getElementById('player');
+    if (video) {
+        video.addEventListener('loadstart', () => console.log('Video load started'));
+        video.addEventListener('loadeddata', () => console.log('Video data loaded'));
+        video.addEventListener('loadedmetadata', () => console.log('Video metadata loaded'));
+        video.addEventListener('canplay', () => console.log('Video can start playing'));
+        video.addEventListener('playing', () => console.log('Video is playing'));
+        video.addEventListener('error', (e) => {
+            console.error('Video error:', video.error);
+            console.error('Error details:', {
+                code: video.error.code,
+                message: video.error.message
+            });
+        });
+
+        // Force video reload
+        video.load();
+    }
 }); 

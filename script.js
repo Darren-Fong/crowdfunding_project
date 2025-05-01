@@ -182,18 +182,18 @@ function positionStretchMarkers() {
 
 // Function to check and update stretch goal achievements
 function checkStretchGoals() {
-    const stretchGoals = document.querySelectorAll('.stretch-goal');
+    const progress = parseFloat(document.querySelector('.progress-percentage').textContent);
+    const stretchGoals = document.querySelectorAll('.stretch-goal-card');
+    
     stretchGoals.forEach(goal => {
-        const goalAmount = parseInt(goal.dataset.goal);
-        const marker = goal.querySelector('.stretch-marker');
-        if (totalPledged >= goalAmount) {
+        const goalAmount = parseFloat(goal.dataset.amount);
+        if (progress >= goalAmount) {
             goal.classList.add('achieved');
-            marker.style.background = '#4CAF50';
-            marker.querySelector('i').style.color = '#fff';
+            goal.querySelector('.stretch-progress-bar').style.width = '100%';
         } else {
             goal.classList.remove('achieved');
-            marker.style.background = '#fff';
-            marker.querySelector('i').style.color = '#4CAF50';
+            const progressPercent = (progress / goalAmount) * 100;
+            goal.querySelector('.stretch-progress-bar').style.width = `${Math.min(progressPercent, 100)}%`;
         }
     });
 }
@@ -407,54 +407,12 @@ function updateBackersList(backers) {
 
 // Function to handle stretch goal interactions
 function setupStretchGoals() {
-    const stretchMarkers = document.querySelectorAll('.stretch-marker');
-    const isMobile = window.innerWidth <= 768;
-
-    stretchMarkers.forEach(marker => {
-        const tooltip = marker.nextElementSibling;
-        
-        if (isMobile) {
-            // Mobile click handling
-            marker.addEventListener('click', (e) => {
-                e.stopPropagation();
-                
-                // Close other open tooltips
-                document.querySelectorAll('.stretch-tooltip.active').forEach(t => {
-                    if (t !== tooltip) {
-                        t.classList.remove('active');
-                        t.previousElementSibling.classList.remove('active');
-                    }
-                });
-                
-                // Toggle current tooltip
-                marker.classList.toggle('active');
-                tooltip.classList.toggle('active');
-            });
-        } else {
-            // Desktop hover handling
-            marker.addEventListener('mouseenter', () => {
-                marker.classList.add('active');
-                tooltip.classList.add('active');
-            });
-            
-            marker.addEventListener('mouseleave', () => {
-                marker.classList.remove('active');
-                tooltip.classList.remove('active');
-            });
-        }
-    });
-
-    // Close tooltips when clicking outside
-    document.addEventListener('click', (e) => {
-        if (isMobile) {
-            const tooltips = document.querySelectorAll('.stretch-tooltip.active');
-            tooltips.forEach(tooltip => {
-                if (!tooltip.contains(e.target) && !tooltip.previousElementSibling.contains(e.target)) {
-                    tooltip.classList.remove('active');
-                    tooltip.previousElementSibling.classList.remove('active');
-                }
-            });
-        }
+    const stretchGoals = document.querySelectorAll('.stretch-goal-card');
+    stretchGoals.forEach(goal => {
+        const progressBar = document.createElement('div');
+        progressBar.className = 'stretch-progress-container';
+        progressBar.innerHTML = '<div class="stretch-progress-bar"></div>';
+        goal.appendChild(progressBar);
     });
 }
 
@@ -597,4 +555,22 @@ document.addEventListener('DOMContentLoaded', function() {
         // Force video reload
         video.load();
     }
-}); 
+});
+
+function updateRewardTiers() {
+    const tiers = document.querySelectorAll('.tier');
+    const progress = parseFloat(document.querySelector('.progress-percentage').textContent);
+    
+    tiers.forEach(tier => {
+        const tierAmount = parseFloat(tier.dataset.amount);
+        const button = tier.querySelector('.select-button');
+        
+        if (progress >= tierAmount) {
+            tier.classList.add('available');
+            button.disabled = false;
+        } else {
+            tier.classList.remove('available');
+            button.disabled = true;
+        }
+    });
+} 

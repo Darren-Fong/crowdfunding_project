@@ -564,9 +564,7 @@ section h2 {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid #e0e0e0;
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
+    margin-bottom: 20px;
 }
 
 .stretch-goal-card:hover {
@@ -667,6 +665,7 @@ section h2 {
     border-radius: 20px;
     font-size: 0.9rem;
     font-weight: 500;
+    display: none; /* Hide by default */
 }
 
 .stretch-progress-container {
@@ -745,6 +744,15 @@ section h2 {
     background: var(--accent-color);
     border-radius: 10px;
     text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+    overflow: visible;
+}
+
+.tier h3 {
+    margin-top: 0;
+    padding-top: 0;
+    color: var(--primary-color);
 }
 
 .tier .price {
@@ -753,23 +761,40 @@ section h2 {
     margin: 20px 0;
 }
 
+.tier .features {
+    text-align: left;
+    margin: 20px 0;
+    padding: 0 20px;
+}
+
+.tier .features li {
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 25px;
+}
+
+.tier .features li::before {
+    content: "✓";
+    color: var(--primary-color);
+    position: absolute;
+    left: 0;
+}
+
 .select-button {
+    width: 100%;
+    padding: 1rem;
     background: var(--primary-color);
     color: white;
     border: none;
-    padding: 10px 20px;
     border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
     cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.select-button:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
+    transition: background-color 0.3s ease;
 }
 
 .select-button:hover {
-    background: #2daa4d;
+    background-color: #2daa4d;
 }
 
 /* Contact Section */
@@ -907,6 +932,7 @@ footer p {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
+    position: relative;
 }
 
 .video-wrapper {
@@ -1650,6 +1676,7 @@ footer p {
     border-radius: 8px;
     margin-bottom: 3rem;
     position: relative;
+    overflow: visible;
 }
 
 .backers-section > p::before {
@@ -1658,8 +1685,9 @@ footer p {
     color: var(--primary-color);
     opacity: 0.2;
     position: absolute;
-    top: -10px;
+    top: -20px;
     left: 10px;
+    z-index: 1;
 }
 
 /* Team Member Enhancements */

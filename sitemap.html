@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Darren Fong">
+    <title>Site Map - Smart Mirror</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .sitemap {
+            padding: 120px 0 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .sitemap h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #1d1d1f;
+        }
+
+        .sitemap-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            padding: 0 20px;
+        }
+
+        .sitemap-section {
+            margin-bottom: 30px;
+        }
+
+        .sitemap-section h2 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .sitemap-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sitemap-section li {
+            margin-bottom: 12px;
+        }
+
+        .sitemap-section a {
+            color: #6e6e73;
+            text-decoration: none;
+            transition: color 0.2s;
+            display: inline-block;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .sitemap-section a::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+        }
+
+        .sitemap-section a:hover {
+            color: #000;
+        }
+
+        @media (max-width: 768px) {
+            .sitemap {
+                padding: 100px 20px 40px;
+            }
+
+            .sitemap-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">Smart Mirror</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="products.html">Product</a></li>
+                <li><a href="progress.html">Progress</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="sitemap">
+        <h1>Site Map</h1>
+        <div class="sitemap-grid">
+            <div class="sitemap-section">
+                <h2>Home</h2>
+                <ul>
+                    <li><a href="index.html#home">Welcome</a></li>
+                    <li><a href="index.html#video">Promotional Video</a></li>
+                    <li><a href="index.html#quotes">Quotes</a></li>
+                    <li><a href="index.html#progress">Progress</a></li>
+                </ul>
+            </div>
+
+            <div class="sitemap-section">
+                <h2>About</h2>
+                <ul>
+                    <li><a href="about.html#about">Our Mission</a></li>
+                    <li><a href="about.html#team">Our Team</a></li>
+                </ul>
+            </div>
+
+            <div class="sitemap-section">
+                <h2>Product</h2>
+                <ul>
+                    <li><a href="products.html#products">Highlights</a></li>
+                    <li><a href="products.html#stretch-goals">Stretch Goals</a></li>
+                    <li><a href="products.html#features">Features</a></li>
+                    <li><a href="products.html#specifications">Specifications</a></li>
+                </ul>
+            </div>
+
+            <div class="sitemap-section">
+                <h2>Progress</h2>
+                <ul>
+                    <li><a href="progress.html#progress">Funding Progress</a></li>
+                    <li><a href="progress.html#backers">Honoured Backers</a></li>
+                    <li><a href="progress.html#tiers">Reward Tiers</a></li>
+                </ul>
+            </div>
+
+            <div class="sitemap-section">
+                <h2>Contact</h2>
+                <ul>
+                    <li><a href="contact.html#contact-form">Contact Form</a></li>
+                    <li><a href="contact.html#official-links">Official Links</a></li>
+                </ul>
+            </div>
+
+            <div class="sitemap-section">
+                <h2>Legal</h2>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms and Conditions</a></li>
+                    <li><a href="refund.html">Return and Refund Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h3><a href="index.html">Home</a></h3>
+                    <ul>
+                        <li><a href="index.html#home">Welcome</a></li>
+                        <li><a href="index.html#video">Promotional Video</a></li>
+                        <li><a href="index.html#quotes">Quotes</a></li>
+                        <li><a href="index.html#progress">Progress</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3><a href="about.html">About</a></h3>
+                    <ul>
+                        <li><a href="about.html#about">Our Mission</a></li>
+                        <li><a href="about.html#team">Our Team</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3><a href="products.html">Product</a></h3>
+                    <ul>
+                        <li><a href="products.html#products">Highlights</a></li>
+                        <li><a href="products.html#stretch-goals">Stretch Goals</a></li>
+                        <li><a href="products.html#features">Features</a></li>
+                        <li><a href="products.html#specifications">Specifications</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3><a href="progress.html">Progress</a></h3>
+                    <ul>
+                        <li><a href="progress.html#progress">Funding Progress</a></li>
+                        <li><a href="progress.html#backers">Honoured Backers</a></li>
+                        <li><a href="progress.html#tiers">Reward Tiers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3><a href="contact.html">Contact</a></h3>
+                    <ul>
+                        <li><a href="contact.html#contact-form">Contact</a></li>
+                        <li><a href="contact.html#official-links">Official Links</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <p>Copyright © 2025 Smart Mirror. All rights reserved. | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms and Conditions</a> | <a href="refund.html">Return and Refund Policy</a> | <a href="sitemap.html">Site Map</a></p>
+                </div>
+                <div class="footer-credits">
+                    <p>Powered by <a href="https://vercel.com" target="_blank" rel="noopener noreferrer">Vercel</a>.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

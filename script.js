@@ -222,7 +222,6 @@ function updateStretchGoalsVisibility() {
             progressBar.style.width = `${Math.min(progress, 100)}%`;
         }
 
-        // Only mark as achieved if we've actually reached the goal amount
         if (currentAmount >= goalAmount) {
             card.classList.add('achieved');
             card.querySelector('.stretch-goal-header i').style.color = '#4CAF50';
@@ -653,4 +652,97 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+});
+
+// Dev Mode Functions
+function enableDevMode() {
+    console.log('%cDev Mode Activated!', 'color: #4CAF50; font-weight: bold; font-size: 16px;');
+    console.log('%cAvailable commands:', 'color: #666;');
+    console.log('- dev.setProgress(amount) - Set total pledged amount');
+    console.log('- dev.addBacker(name, amount) - Add a new backer');
+    console.log('- dev.clearBackers() - Clear all backers');
+    console.log('- dev.disableDevMode() - Disable dev mode');
+
+    window.dev = {
+        setProgress: async function(amount) {
+            if (typeof amount !== 'number' || amount < 0) {
+                console.error('Invalid amount. Please provide a positive number.');
+                return;
+            }
+            totalPledged = amount;
+            localStorage.setItem('totalPledged', totalPledged);
+            await updateProgress();
+            console.log(`Progress updated to HK$${amount.toLocaleString()}`);
+        },
+
+        addBacker: async function(name, amount) {
+            if (!name || typeof amount !== 'number' || amount <= 0) {
+                console.error('Invalid parameters. Name and positive amount required.');
+                return;
+            }
+            try {
+                await updateDatabase(amount, { name });
+                console.log(`Added backer: ${name} (HK$${amount.toLocaleString()})`);
+            } catch (error) {
+                console.error('Error adding backer:', error);
+            }
+        },
+
+        clearBackers: async function() {
+            try {
+                const response = await fetch('/api/progress', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        amount: 0,
+                        backer: { name: 'System', clear: true }
+                    })
+                });
+                const data = await response.json();
+                if (data && data.backers) {
+                    updateBackersList([]);
+                    console.log('Backers list cleared');
+                }
+            } catch (error) {
+                console.error('Error clearing backers:', error);
+            }
+        },
+
+        disableDevMode: function() {
+            delete window.dev;
+            console.log('%cDev Mode Disabled', 'color: #666;');
+        }
+    };
+}
+
+// Add dev mode button to the page
+document.addEventListener('DOMContentLoaded', function() {
+    const devButton = document.createElement('button');
+    devButton.textContent = 'Enable Dev Mode';
+    devButton.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 20px;
+        background: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        z-index: 9999;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        opacity: 0.3;
+        transition: opacity 0.3s;
+    `;
+    devButton.addEventListener('mouseover', () => devButton.style.opacity = '1');
+    devButton.addEventListener('mouseout', () => devButton.style.opacity = '0.3');
+    devButton.addEventListener('click', () => {
+        enableDevMode();
+        devButton.remove();
+    });
+    document.body.appendChild(devButton);
 }); 

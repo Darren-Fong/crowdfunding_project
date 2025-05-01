@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funding Progress - Smart Mirror</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">Smart Mirror</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="products.html">Product</a></li>
+                <li><a href="progress.html">Progress</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="progress">
+        <div class="progress-container">
+            <h2>Funding Progress</h2>
+            <div class="progress-text">
+                <span class="progress-amount">HK$0 raised of HK$100,000</span>
+                <span class="progress-percentage">0%</span>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar"></div>
+                <div class="stretch-goal" data-goal="35000">
+                    <div class="stretch-marker">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div class="stretch-tooltip">
+                        <h3>Stretch Goal 1: HK$35,000</h3>
+                        <p>AI Speaker Integration</p>
+                        <a href="products.html#stretch-goals" class="stretch-details-btn">View Details</a>
+                    </div>
+                </div>
+                <div class="stretch-goal" data-goal="65000">
+                    <div class="stretch-marker">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div class="stretch-tooltip">
+                        <h3>Stretch Goal 2: HK$65,000</h3>
+                        <p>Security Features</p>
+                        <a href="products.html#stretch-goals" class="stretch-details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Backers List Section -->
+    <div class="backers-section">
+        <h2>Our Backers</h2>
+        <div class="backers-list">
+            <!-- Backers will be dynamically added here -->
+        </div>
+    </div>
+
+    <section class="tiers">
+        <div class="container">
+            <h2>Reward Tiers</h2>
+            <div class="reward-tiers-grid">
+                <div class="tier-card">
+                    <div class="tier-header">
+                        <i class="fas fa-earlybirds"></i>
+                        <h3>Early Bird</h3>
+                        <span class="price">HK$500</span>
+                    </div>
+                    <ul class="tier-features">
+                        <li><i class="fas fa-check"></i> Early access to Smart Mirror</li>
+                        <li><i class="fas fa-check"></i> Basic AI features</li>
+                        <li><i class="fas fa-check"></i> 1-year warranty</li>
+                    </ul>
+                    <button class="select-button" onclick="selectTier('Early Bird', 500)">Select Tier</button>
+                </div>
+                <div class="tier-card featured">
+                    <div class="tier-header">
+                        <i class="fas fa-star"></i>
+                        <h3>Supporter</h3>
+                        <span class="price">HK$1,000</span>
+                    </div>
+                    <ul class="tier-features">
+                        <li><i class="fas fa-check"></i> All Early Bird benefits</li>
+                        <li><i class="fas fa-check"></i> Advanced AI features</li>
+                        <li><i class="fas fa-check"></i> 2-year warranty</li>
+                        <li><i class="fas fa-check"></i> Priority support</li>
+                    </ul>
+                    <button class="select-button" onclick="selectTier('Supporter', 1000)">Select Tier</button>
+                </div>
+                <div class="tier-card">
+                    <div class="tier-header">
+                        <i class="fas fa-crown"></i>
+                        <h3>VIP Backer</h3>
+                        <span class="price">HK$2,000</span>
+                    </div>
+                    <ul class="tier-features">
+                        <li><i class="fas fa-check"></i> All Supporter benefits</li>
+                        <li><i class="fas fa-check"></i> Premium AI features</li>
+                        <li><i class="fas fa-check"></i> 3-year warranty</li>
+                        <li><i class="fas fa-check"></i> 24/7 priority support</li>
+                        <li><i class="fas fa-check"></i> Exclusive updates</li>
+                    </ul>
+                    <button class="select-button" onclick="selectTier('VIP Backer', 2000)">Select Tier</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Smart Mirror. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Custom Alert -->
+    <div id="customAlert" class="custom-alert">
+        <div class="alert-content">
+            <div class="alert-header">
+                <h3 class="alert-title"></h3>
+            </div>
+            <div class="alert-body">
+                <p class="alert-message"></p>
+                <input type="text" class="alert-input" placeholder="Enter your name">
+            </div>
+            <div class="alert-footer">
+                <button class="alert-button cancel">Cancel</button>
+                <button class="alert-button confirm">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

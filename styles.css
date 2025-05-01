@@ -1007,15 +1007,15 @@ footer {
 }
 
 .footer-column h3 a {
-    color: #000;
+    color: #6e6e73;
     text-decoration: none;
-    font-size: 1.2rem;
-    font-weight: bold;
+    font-size: 13px;
+    font-weight: 600;
     transition: color 0.3s;
 }
 
 .footer-column h3 a:hover {
-    color: var(--primary-color);
+    color: #000;
 }
 
 .footer-column ul {
@@ -1031,6 +1031,7 @@ footer {
 .footer-column ul li a {
     color: #6e6e73;
     text-decoration: none;
+    font-size: 12px;
     transition: color 0.2s;
 }
 

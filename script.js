@@ -543,4 +543,36 @@ function selectTier(tierName, amount) {
     cancelBtn.onclick = function() {
         alert.classList.remove('active');
     };
-} 
+}
+
+// Prevent video download
+document.addEventListener('DOMContentLoaded', function() {
+    const video = document.getElementById('player');
+    if (video) {
+        // Prevent keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 's' && (e.ctrlKey || e.metaKey)) {
+                e.preventDefault();
+            }
+        });
+
+        // Prevent right click on video
+        video.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Prevent drag and drop
+        video.addEventListener('dragstart', function(e) {
+            e.preventDefault();
+        });
+
+        // Add custom controls behavior
+        video.addEventListener('play', function() {
+            console.log('Video is playing');
+        });
+
+        video.addEventListener('pause', function() {
+            console.log('Video is paused');
+        });
+    }
+}); 

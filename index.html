@@ -41,7 +41,13 @@
             <h2>Watch Our Product in Action</h2>
             <div class="video-container">
                 <div class="video-wrapper">
-                    <video id="player" playsinline controls>
+                    <video 
+                        id="player" 
+                        playsinline 
+                        controls 
+                        controlsList="nodownload" 
+                        disablePictureInPicture
+                        oncontextmenu="return false;">
                         <source src="crowdfunding_project.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>

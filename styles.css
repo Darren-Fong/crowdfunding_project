@@ -220,7 +220,7 @@ section h2 {
 
 /* About Section */
 .about {
-    padding: 100px 0 30px; /* Reduced bottom padding from 50px to 30px */
+    padding: 100px 0 15px; /* Reduced bottom padding from 30px to 15px */
 }
 
 .about h2 {
@@ -2015,9 +2015,9 @@ video#player.main-video {
     line-height: 1;
 }
 
-/* Team Member Enhancements */
+/* Team Section */
 .team {
-    padding: 30px 0 100px; /* Reduced top padding from 50px to 30px */
+    padding: 15px 0 100px; /* Reduced top padding from 30px to 15px */
 }
 
 .team > p {

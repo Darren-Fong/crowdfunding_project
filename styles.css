@@ -220,7 +220,8 @@ section h2 {
 
 /* About Section */
 .about {
-    padding: 100px 0 15px; /* Reduced bottom padding from 30px to 15px */
+    padding: 100px 0 0; /* Remove bottom padding completely */
+    margin-bottom: 10px; /* Add small margin instead */
 }
 
 .about h2 {
@@ -2017,7 +2018,8 @@ video#player.main-video {
 
 /* Team Section */
 .team {
-    padding: 15px 0 100px; /* Reduced top padding from 30px to 15px */
+    padding: 0 0 100px; /* Remove top padding completely */
+    margin-top: 10px; /* Add small margin instead */
 }
 
 .team > p {

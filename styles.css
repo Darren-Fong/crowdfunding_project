@@ -661,38 +661,43 @@ section h2 {
     }
 }
 
+/* Stretch Goals Achievement Styles */
 .stretch-goal-card.achieved {
-    border: 2px solid #4CAF50;
-    background: linear-gradient(to right, rgba(76, 175, 80, 0.05), white);
-    position: relative;
+    border: 2px solid #4CAF50 !important;
+    background: linear-gradient(to right, rgba(76, 175, 80, 0.05), white) !important;
+    position: relative !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2) !important;
 }
 
 .stretch-goal-card.achieved .stretch-goal-header h3 {
-    color: #4CAF50;
+    color: #4CAF50 !important;
 }
 
 .stretch-goal-card.achieved .stretch-features li::before {
-    color: #4CAF50;
+    color: #4CAF50 !important;
 }
 
 .stretch-goal-card.achieved::after {
-    content: '✓ Achieved!';
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: #4CAF50;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    display: block;
-    z-index: 2;
+    content: '✓ Achieved!' !important;
+    position: absolute !important;
+    top: 15px !important;
+    right: 15px !important;
+    background: #4CAF50 !important;
+    color: white !important;
+    padding: 5px 10px !important;
+    border-radius: 20px !important;
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+    display: block !important;
+    z-index: 10 !important;
+    pointer-events: none !important;
 }
 
 .stretch-goal-card.achieved .stretch-progress-bar {
     background: #4CAF50 !important;
     width: 100% !important;
+    transition: none !important;
 }
 
 .stretch-goal-card.achieved .stretch-goal-header i {
@@ -700,7 +705,16 @@ section h2 {
 }
 
 .stretch-goal-card.achieved .stretch-progress-container {
-    background: rgba(76, 175, 80, 0.1);
+    background: rgba(76, 175, 80, 0.1) !important;
+}
+
+/* Ensure stretch goals are visible */
+.stretch-goals-info,
+.stretch-goals-grid,
+.stretch-goal-card {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 .stretch-progress-container {
@@ -991,38 +1005,41 @@ footer p {
 
 /* Video Section */
 .video-section {
-    padding: 40px 20px;
+    padding: 40px 0;
     background: var(--light-gray);
     overflow: hidden;
+    width: 100%;
 }
 
 .video-container {
-    max-width: 800px;
-    width: 100%;
+    max-width: 700px;
+    width: 90%;
     margin: 0 auto;
     padding: 0;
+    position: relative;
+    overflow: hidden;
 }
 
 .main-video {
     width: 100%;
     max-width: 100%;
+    height: auto;
     aspect-ratio: 16/9;
     background: #000;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: block;
+    margin: 0 auto;
 }
 
 @media (max-width: 768px) {
     .video-section {
-        padding: 20px 10px;
+        padding: 20px 0;
     }
     
     .video-container {
-        padding: 0;
-    }
-    
-    .main-video {
-        border-radius: 0;
+        width: 95%;
+        max-width: 600px;
     }
 }
 

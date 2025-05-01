@@ -210,30 +210,51 @@ function updateStretchGoalsVisibility() {
     if (!stretchGoalsInfo) return;
 
     const stretchGoalCards = document.querySelectorAll('.stretch-goal-card');
-    const currentAmount = totalPledged;
+    if (!stretchGoalCards.length) return;
+
+    console.log('Updating stretch goals visibility. Current amount:', totalPledged);
 
     stretchGoalCards.forEach(card => {
         const goalText = card.querySelector('h3').textContent;
-        const goalAmount = parseInt(goalText.match(/HK\$(\d+)/)[1]);
-        const progress = (currentAmount / goalAmount) * 100;
+        const matches = goalText.match(/HK\$(\d+)/);
+        if (!matches) {
+            console.error('Could not find goal amount in:', goalText);
+            return;
+        }
+
+        const goalAmount = parseInt(matches[1]);
+        console.log('Goal amount:', goalAmount, 'Current amount:', totalPledged);
+        
+        const progress = (totalPledged / goalAmount) * 100;
         const progressBar = card.querySelector('.stretch-progress-bar');
         
         if (progressBar) {
             progressBar.style.width = `${Math.min(progress, 100)}%`;
         }
 
-        if (currentAmount >= goalAmount) {
+        // Force remove and re-add class to trigger style refresh
+        card.classList.remove('achieved');
+        void card.offsetWidth; // Trigger reflow
+
+        if (totalPledged >= goalAmount) {
+            console.log('Goal achieved:', goalAmount);
             card.classList.add('achieved');
+            
+            // Force style updates
             const icon = card.querySelector('.stretch-goal-header i');
+            if (icon) {
+                icon.style.removeProperty('color');
+                void icon.offsetWidth;
+                icon.style.color = '#4CAF50';
+            }
+
             const progressBarElement = card.querySelector('.stretch-progress-bar');
-            if (icon) icon.style.color = '#4CAF50';
-            if (progressBarElement) progressBarElement.style.background = '#4CAF50';
-        } else {
-            card.classList.remove('achieved');
-            const icon = card.querySelector('.stretch-goal-header i');
-            const progressBarElement = card.querySelector('.stretch-progress-bar');
-            if (icon) icon.style.color = '';
-            if (progressBarElement) progressBarElement.style.background = '';
+            if (progressBarElement) {
+                progressBarElement.style.removeProperty('background');
+                void progressBarElement.offsetWidth;
+                progressBarElement.style.background = '#4CAF50';
+                progressBarElement.style.width = '100%';
+            }
         }
     });
 }
@@ -241,6 +262,8 @@ function updateStretchGoalsVisibility() {
 // Update progress and stretch goals visibility
 function updateProgress() {
     const progress = (totalPledged / targetAmount) * 100;
+    console.log('Updating progress:', progress + '%', 'Total pledged:', totalPledged);
+    
     const progressBars = document.querySelectorAll('.progress-bar');
     const progressAmounts = document.querySelectorAll('.progress-amount');
     const progressPercentages = document.querySelectorAll('.progress-percentage');
@@ -257,7 +280,7 @@ function updateProgress() {
         percentage.textContent = `${Math.round(Math.min(progress, 100))}%`;
     });
 
-    checkStretchGoals();
+    // Always update stretch goals when progress is updated
     updateStretchGoalsVisibility();
 }
 
@@ -267,60 +290,7 @@ if (document.querySelector('.progress-bar-container')) {
     getProgress().then(() => {
         // Position stretch markers
         positionStretchMarkers();
-        
-        // Force a reflow to ensure the transition works
-        const progressBars = document.querySelectorAll('.progress-bar');
-        progressBars.forEach(bar => {
-            bar.offsetHeight; // Force reflow
-        });
         updateProgress();
-    });
-
-    // Handle tier selection
-    document.querySelectorAll('.select-button').forEach(button => {
-        button.addEventListener('click', async function() {
-            const tier = this.closest('.tier');
-            const price = tier.querySelector('.price').textContent;
-            const amount = parseInt(price.replace(/[^0-9]/g, ''));
-
-            try {
-                const backerName = await customAlert.show(
-                    'Enter Your Name',
-                    'Please enter your name (optional):',
-                    true
-                );
-
-                if (backerName === false) return; // User cancelled
-
-                const backer = backerName ? { name: backerName } : { anonymous: true };
-
-                // Disable button during update
-                this.disabled = true;
-                this.textContent = 'Processing...';
-
-                // Update database
-                await updateDatabase(amount, backer);
-                
-                // Show success message
-                await customAlert.show(
-                    'Thank You!',
-                    `Thank you for your pledge of HK$${amount.toLocaleString()}!`,
-                    false
-                );
-
-            } catch (error) {
-                console.error('Error processing pledge:', error);
-                await customAlert.show(
-                    'Error',
-                    error.message || 'There was an error processing your pledge. Please try again.',
-                    false
-                );
-            } finally {
-                // Re-enable button
-                this.disabled = false;
-                this.textContent = 'Select Tier';
-            }
-        });
     });
 
     // Update every 30 seconds
@@ -329,8 +299,11 @@ if (document.querySelector('.progress-bar-container')) {
 
 // Also update stretch goals on the products page
 if (document.querySelector('.stretch-goals-info')) {
+    console.log('Found stretch goals info section');
     getProgress().then(() => {
+        console.log('Initial progress update for stretch goals');
         updateStretchGoalsVisibility();
+        
         // Add interval to keep stretch goals updated
         setInterval(() => {
             getProgress().then(() => {

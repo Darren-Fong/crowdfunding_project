@@ -1,0 +1,16 @@
+# Video MIME types
+AddType video/mp4 .mp4
+AddType video/webm .webm
+AddType video/ogg .ogv
+
+# Force download off for video files
+<FilesMatch "\.(?i:mp4|webm|ogv)$">
+    Header set Content-Disposition inline
+    Header set X-Content-Type-Options nosniff
+    Header set Content-Type video/mp4
+</FilesMatch>
+
+# Enable CORS
+Header set Access-Control-Allow-Origin "*"
+Header set Access-Control-Allow-Methods "GET,POST,OPTIONS,DELETE,PUT"
+Header set Access-Control-Allow-Headers "DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type" 

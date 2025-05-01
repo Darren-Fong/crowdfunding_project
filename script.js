@@ -182,23 +182,30 @@ function positionStretchMarkers() {
 
 // Function to check and update stretch goal achievements
 function checkStretchGoals() {
-    const progress = parseFloat(document.querySelector('.progress-percentage').textContent.replace('%', ''));
     const stretchGoals = document.querySelectorAll('.stretch-goal-card');
     
     stretchGoals.forEach(goal => {
-        const goalAmount = parseFloat(goal.dataset.amount);
+        const goalAmount = 35000; // First stretch goal at HK$35,000
+        const secondGoalAmount = 65000; // Second stretch goal at HK$65,000
         const progressBar = goal.querySelector('.stretch-progress-bar');
         
-        if (progress >= goalAmount) {
-            goal.classList.add('achieved');
-            if (progressBar) {
-                progressBar.style.width = '100%';
+        if (goal.querySelector('h3').textContent.includes('35,000')) {
+            // First stretch goal
+            if (totalPledged >= goalAmount) {
+                goal.classList.add('achieved');
+                if (progressBar) progressBar.style.width = '100%';
+            } else {
+                goal.classList.remove('achieved');
+                if (progressBar) progressBar.style.width = `${(totalPledged / goalAmount) * 100}%`;
             }
-        } else {
-            goal.classList.remove('achieved');
-            if (progressBar) {
-                const progressPercent = (progress / goalAmount) * 100;
-                progressBar.style.width = `${Math.min(progressPercent, 100)}%`;
+        } else if (goal.querySelector('h3').textContent.includes('65,000')) {
+            // Second stretch goal
+            if (totalPledged >= secondGoalAmount) {
+                goal.classList.add('achieved');
+                if (progressBar) progressBar.style.width = '100%';
+            } else {
+                goal.classList.remove('achieved');
+                if (progressBar) progressBar.style.width = `${(totalPledged / secondGoalAmount) * 100}%`;
             }
         }
     });

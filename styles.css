@@ -220,7 +220,7 @@ section h2 {
 
 /* About Section */
 .about {
-    padding: 100px 0 50px; /* Reduced bottom padding */
+    padding: 100px 0 30px; /* Reduced bottom padding from 50px to 30px */
 }
 
 .about h2 {
@@ -2017,7 +2017,7 @@ video#player.main-video {
 
 /* Team Member Enhancements */
 .team {
-    padding: 50px 0 100px; /* Reduced top padding */
+    padding: 30px 0 100px; /* Reduced top padding from 50px to 30px */
 }
 
 .team > p {

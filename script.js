@@ -611,4 +611,46 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Check stretch goals
     checkStretchGoals();
+});
+
+// Handle smooth scrolling for stretch goals links
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if we have a hash in the URL
+    if (window.location.hash === '#stretch-goals-info') {
+        setTimeout(() => {
+            const element = document.querySelector('.stretch-goals-info');
+            if (element) {
+                const headerOffset = 100;
+                const elementPosition = element.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }, 100); // Small delay to ensure page is fully loaded
+    }
+
+    // Handle clicks on stretch goal links
+    document.querySelectorAll('a[href*="#stretch-goals-info"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            if (this.getAttribute('href').includes('products.html')) {
+                // Don't prevent default for links to other pages
+                return;
+            }
+            e.preventDefault();
+            const element = document.querySelector('.stretch-goals-info');
+            if (element) {
+                const headerOffset = 100;
+                const elementPosition = element.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
 }); 

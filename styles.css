@@ -2291,7 +2291,7 @@ html {
 
 /* Privacy Policy Styles */
 .privacy-policy {
-    padding: 40px 0;
+    padding: 100px 0 40px; /* Increased top padding to account for fixed navbar */
     background-color: #fff;
 }
 

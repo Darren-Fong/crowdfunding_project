@@ -1575,6 +1575,7 @@ video#player.main-video {
     max-width: 1200px;
     margin: 60px auto;
     padding: 0 20px;
+    width: 100%;
 }
 
 .backers-section h2 {
@@ -1586,12 +1587,14 @@ video#player.main-video {
 
 .backers-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-template-columns: repeat(4, 1fr); /* Force 4 columns by default */
     gap: 15px;
     padding: 20px;
     background: white;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin: 0 auto;
 }
 
 .backer-item {
@@ -1605,6 +1608,7 @@ video#player.main-video {
     justify-content: center;
     align-items: center;
     min-height: 80px;
+    width: 100%;
 }
 
 .backer-item:hover {
@@ -1626,9 +1630,15 @@ video#player.main-video {
 }
 
 /* Responsive adjustments */
+@media (max-width: 992px) {
+    .backers-list {
+        grid-template-columns: repeat(3, 1fr); /* 3 columns on medium screens */
+    }
+}
+
 @media (max-width: 768px) {
     .backers-list {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on small screens */
         gap: 12px;
         padding: 15px;
     }
@@ -1641,15 +1651,17 @@ video#player.main-video {
         min-height: 70px;
         padding: 12px;
     }
+}
 
-    .backer-item .name {
-        font-size: 1rem;
+@media (max-width: 480px) {
+    .backers-list {
+        grid-template-columns: repeat(1, 1fr); /* 1 column on very small screens */
     }
 }
 
 @media (min-width: 1200px) {
     .backers-list {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        grid-template-columns: repeat(5, 1fr); /* 5 columns on large screens */
         gap: 20px;
     }
 }

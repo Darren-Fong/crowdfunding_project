@@ -664,6 +664,7 @@ section h2 {
 .stretch-goal-card.achieved {
     border: 2px solid #4CAF50;
     background: linear-gradient(to right, rgba(76, 175, 80, 0.05), white);
+    position: relative;
 }
 
 .stretch-goal-card.achieved .stretch-goal-header h3 {
@@ -686,10 +687,20 @@ section h2 {
     font-size: 0.9rem;
     font-weight: 500;
     display: block;
+    z-index: 2;
 }
 
 .stretch-goal-card.achieved .stretch-progress-bar {
-    background: #4CAF50;
+    background: #4CAF50 !important;
+    width: 100% !important;
+}
+
+.stretch-goal-card.achieved .stretch-goal-header i {
+    color: #4CAF50 !important;
+}
+
+.stretch-goal-card.achieved .stretch-progress-container {
+    background: rgba(76, 175, 80, 0.1);
 }
 
 .stretch-progress-container {
@@ -980,18 +991,21 @@ footer p {
 
 /* Video Section */
 .video-section {
-    padding: 60px 0;
+    padding: 40px 20px;
     background: var(--light-gray);
+    overflow: hidden;
 }
 
 .video-container {
     max-width: 800px;
+    width: 100%;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0;
 }
 
 .main-video {
     width: 100%;
+    max-width: 100%;
     aspect-ratio: 16/9;
     background: #000;
     border-radius: 8px;
@@ -999,6 +1013,10 @@ footer p {
 }
 
 @media (max-width: 768px) {
+    .video-section {
+        padding: 20px 10px;
+    }
+    
     .video-container {
         padding: 0;
     }

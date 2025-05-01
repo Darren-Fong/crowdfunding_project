@@ -224,12 +224,16 @@ function updateStretchGoalsVisibility() {
 
         if (currentAmount >= goalAmount) {
             card.classList.add('achieved');
-            card.querySelector('.stretch-goal-header i').style.color = '#4CAF50';
-            card.querySelector('.stretch-progress-bar').style.background = '#4CAF50';
+            const icon = card.querySelector('.stretch-goal-header i');
+            const progressBarElement = card.querySelector('.stretch-progress-bar');
+            if (icon) icon.style.color = '#4CAF50';
+            if (progressBarElement) progressBarElement.style.background = '#4CAF50';
         } else {
             card.classList.remove('achieved');
-            card.querySelector('.stretch-goal-header i').style.color = '';
-            card.querySelector('.stretch-progress-bar').style.background = '';
+            const icon = card.querySelector('.stretch-goal-header i');
+            const progressBarElement = card.querySelector('.stretch-progress-bar');
+            if (icon) icon.style.color = '';
+            if (progressBarElement) progressBarElement.style.background = '';
         }
     });
 }
@@ -327,6 +331,12 @@ if (document.querySelector('.progress-bar-container')) {
 if (document.querySelector('.stretch-goals-info')) {
     getProgress().then(() => {
         updateStretchGoalsVisibility();
+        // Add interval to keep stretch goals updated
+        setInterval(() => {
+            getProgress().then(() => {
+                updateStretchGoalsVisibility();
+            });
+        }, 30000);
     });
 }
 

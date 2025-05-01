@@ -993,10 +993,9 @@ footer {
 
 .footer-columns {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 30px;
-    padding: 20px 0;
-    border-bottom: 1px solid #d2d2d7;
+    margin-bottom: 40px;
 }
 
 .footer-column h3 {
@@ -1088,17 +1087,21 @@ footer {
     text-decoration: underline;
 }
 
+@media (max-width: 992px) {
+    .footer-columns {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
 @media (max-width: 768px) {
     .footer-columns {
         grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
     }
 }
 
 @media (max-width: 480px) {
     .footer-columns {
         grid-template-columns: 1fr;
-        gap: 15px;
     }
     
     .footer-content {

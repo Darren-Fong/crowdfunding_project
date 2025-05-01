@@ -900,23 +900,54 @@ footer p {
 .video-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 2rem;
 }
 
 .video-wrapper {
     position: relative;
-    width: 100%;
-    height: auto;
-    background: var(--white);
-    border-radius: 12px;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
     overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background: #000;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .video-wrapper video {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: auto;
-    display: block;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Plyr Customization */
+.plyr {
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.plyr--video {
+    background: #000;
+}
+
+.plyr__control--overlaid {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.plyr__control--overlaid:hover {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.plyr--full-ui input[type=range] {
+    color: #fff;
+}
+
+.plyr__control.plyr__tab-focus,
+.plyr__control:hover,
+.plyr__control[aria-expanded=true] {
+    background: rgba(255, 255, 255, 0.2);
 }
 
 .video-section h2 {

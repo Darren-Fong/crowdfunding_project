@@ -710,33 +710,4 @@ function enableDevMode() {
             console.log('%cDev Mode Disabled', 'color: #666;');
         }
     };
-}
-
-// Add dev mode button to the page
-document.addEventListener('DOMContentLoaded', function() {
-    const devButton = document.createElement('button');
-    devButton.textContent = 'Enable Dev Mode';
-    devButton.style.cssText = `
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        padding: 10px 20px;
-        background: #4CAF50;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        z-index: 9999;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        opacity: 0.3;
-        transition: opacity 0.3s;
-    `;
-    devButton.addEventListener('mouseover', () => devButton.style.opacity = '1');
-    devButton.addEventListener('mouseout', () => devButton.style.opacity = '0.3');
-    devButton.addEventListener('click', () => {
-        enableDevMode();
-        devButton.remove();
-    });
-    document.body.appendChild(devButton);
-}); 
+} 

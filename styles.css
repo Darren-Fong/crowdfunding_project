@@ -1012,8 +1012,8 @@ footer p {
 }
 
 .video-container {
-    width: 100%;
-    max-width: 640px;
+    width: 80%;
+    max-width: 800px;
     margin: 0 auto;
     padding: 20px;
     position: relative;
@@ -1023,7 +1023,6 @@ footer p {
 video#player.main-video {
     display: block;
     width: 100%;
-    max-width: 640px;
     height: auto;
     aspect-ratio: 16/9;
     background: #000;
@@ -1041,19 +1040,14 @@ video#player.main-video {
 }
 
 @media (max-width: 768px) {
-    .video-section {
-        padding: 20px 0;
-    }
-    
     .video-container {
-        width: 95%;
-        max-width: 480px;
-        padding: 10px;
+        width: 90%;
     }
+}
 
-    video#player.main-video {
-        max-width: 100%;
-        border-radius: 4px;
+@media (min-width: 1200px) {
+    .video-container {
+        width: 70%;
     }
 }
 
@@ -1957,4 +1951,27 @@ html {
     font-size: 1.1rem;
     line-height: 1.6;
     font-style: italic;
+}
+
+/* Products Page Text Alignment */
+.products h2,
+.products p,
+.products h3,
+.products h4,
+.products li {
+    text-align: center;
+}
+
+.product-highlights,
+.features-grid,
+.spec-grid,
+.stretch-goals-grid {
+    text-align: center;
+}
+
+.highlight-card,
+.feature,
+.spec,
+.stretch-goal-card {
+    text-align: center;
 } 

@@ -16,6 +16,14 @@
         { "key": "Access-Control-Allow-Methods", "value": "GET, POST, OPTIONS" },
         { "key": "Access-Control-Allow-Headers", "value": "Content-Type" }
       ]
+    },
+    {
+      "source": "/(.*).mp4",
+      "headers": [
+        { "key": "Content-Type", "value": "video/mp4" },
+        { "key": "Content-Disposition", "value": "inline" },
+        { "key": "Accept-Ranges", "value": "bytes" }
+      ]
     }
   ]
 } 

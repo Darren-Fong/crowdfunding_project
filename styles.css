@@ -1006,6 +1006,17 @@ footer {
     font-weight: 600;
 }
 
+.footer-column h3 a {
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.footer-column h3 a:hover {
+    text-decoration: none;
+    color: #000000;
+}
+
 .footer-column ul {
     list-style: none;
     padding: 0;

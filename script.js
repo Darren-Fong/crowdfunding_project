@@ -182,18 +182,24 @@ function positionStretchMarkers() {
 
 // Function to check and update stretch goal achievements
 function checkStretchGoals() {
-    const progress = parseFloat(document.querySelector('.progress-percentage').textContent);
+    const progress = parseFloat(document.querySelector('.progress-percentage').textContent.replace('%', ''));
     const stretchGoals = document.querySelectorAll('.stretch-goal-card');
     
     stretchGoals.forEach(goal => {
         const goalAmount = parseFloat(goal.dataset.amount);
+        const progressBar = goal.querySelector('.stretch-progress-bar');
+        
         if (progress >= goalAmount) {
             goal.classList.add('achieved');
-            goal.querySelector('.stretch-progress-bar').style.width = '100%';
+            if (progressBar) {
+                progressBar.style.width = '100%';
+            }
         } else {
             goal.classList.remove('achieved');
-            const progressPercent = (progress / goalAmount) * 100;
-            goal.querySelector('.stretch-progress-bar').style.width = `${Math.min(progressPercent, 100)}%`;
+            if (progressBar) {
+                const progressPercent = (progress / goalAmount) * 100;
+                progressBar.style.width = `${Math.min(progressPercent, 100)}%`;
+            }
         }
     });
 }
@@ -409,10 +415,12 @@ function updateBackersList(backers) {
 function setupStretchGoals() {
     const stretchGoals = document.querySelectorAll('.stretch-goal-card');
     stretchGoals.forEach(goal => {
-        const progressBar = document.createElement('div');
-        progressBar.className = 'stretch-progress-container';
-        progressBar.innerHTML = '<div class="stretch-progress-bar"></div>';
-        goal.appendChild(progressBar);
+        if (!goal.querySelector('.stretch-progress-container')) {
+            const progressBar = document.createElement('div');
+            progressBar.className = 'stretch-progress-container';
+            progressBar.innerHTML = '<div class="stretch-progress-bar"></div>';
+            goal.appendChild(progressBar);
+        }
     });
 }
 
@@ -559,7 +567,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function updateRewardTiers() {
     const tiers = document.querySelectorAll('.tier');
-    const progress = parseFloat(document.querySelector('.progress-percentage').textContent);
+    const progress = parseFloat(document.querySelector('.progress-percentage').textContent.replace('%', ''));
     
     tiers.forEach(tier => {
         const tierAmount = parseFloat(tier.dataset.amount);
@@ -567,10 +575,40 @@ function updateRewardTiers() {
         
         if (progress >= tierAmount) {
             tier.classList.add('available');
-            button.disabled = false;
+            if (button) {
+                button.disabled = false;
+            }
         } else {
             tier.classList.remove('available');
-            button.disabled = true;
+            if (button) {
+                button.disabled = true;
+            }
         }
     });
-} 
+}
+
+// Initialize everything when the DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Setup video player
+    const video = document.getElementById('player');
+    if (video) {
+        video.addEventListener('error', function(e) {
+            console.error('Video error:', video.error);
+            // Try to reload the video
+            video.load();
+        });
+        
+        // Force video reload
+        video.load();
+    }
+    
+    // Setup stretch goals
+    setupStretchGoals();
+    
+    // Update progress and tiers
+    updateProgress();
+    updateRewardTiers();
+    
+    // Check stretch goals
+    checkStretchGoals();
+}); 

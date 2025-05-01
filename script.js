@@ -223,44 +223,38 @@ function updateStretchGoalsVisibility() {
 
     stretchGoalCards.forEach(card => {
         const goalText = card.querySelector('h3').textContent;
-        const matches = goalText.match(/HK\$(\d+)/);
+        const matches = goalText.match(/HK\$(\d+,\d+|\d+)/);
         if (!matches) {
             console.error('Could not find goal amount in:', goalText);
             return;
         }
 
-        const goalAmount = parseInt(matches[1]);
+        const goalAmount = parseInt(matches[1].replace(',', ''));
         console.log('Goal amount:', goalAmount, 'Current amount:', totalPledged);
         
-        const progress = (totalPledged / goalAmount) * 100;
+        // Update progress bar
         const progressBar = card.querySelector('.stretch-progress-bar');
-        
         if (progressBar) {
-            progressBar.style.width = `${Math.min(progress, 100)}%`;
+            const progress = Math.min((totalPledged / goalAmount) * 100, 100);
+            progressBar.style.width = `${progress}%`;
+            
+            // Update progress bar color based on achievement
+            if (totalPledged >= goalAmount) {
+                progressBar.style.background = '#4CAF50';
+            } else {
+                progressBar.style.background = 'var(--primary-color)';
+            }
         }
 
-        // Force remove and re-add class to trigger style refresh
+        // Update achievement status
         card.classList.remove('achieved');
-        void card.offsetWidth; // Trigger reflow
-
         if (totalPledged >= goalAmount) {
-            console.log('Goal achieved:', goalAmount);
             card.classList.add('achieved');
             
-            // Force style updates
+            // Update icon color
             const icon = card.querySelector('.stretch-goal-header i');
             if (icon) {
-                icon.style.removeProperty('color');
-                void icon.offsetWidth;
                 icon.style.color = '#4CAF50';
-            }
-
-            const progressBarElement = card.querySelector('.stretch-progress-bar');
-            if (progressBarElement) {
-                progressBarElement.style.removeProperty('background');
-                void progressBarElement.offsetWidth;
-                progressBarElement.style.background = '#4CAF50';
-                progressBarElement.style.width = '100%';
             }
         }
     });

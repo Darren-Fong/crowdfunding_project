@@ -1068,31 +1068,106 @@ video#player.main-video {
 .testimonial h2 {
     margin-bottom: 2rem;
     color: #333;
-    font-size: 2rem;
+    font-size: 2.2rem;
+    font-weight: 600;
+    position: relative;
+    display: inline-block;
+}
+
+.testimonial h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--primary-color);
 }
 
 .testimonial-content {
     max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem;
+    margin: 2rem auto;
+    padding: 2.5rem;
     background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonial-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+}
+
+.testimonial-content::before {
+    content: '"';
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    font-size: 5rem;
+    color: var(--primary-color);
+    opacity: 0.1;
+    font-family: serif;
+    line-height: 1;
 }
 
 .testimonial-content h3 {
     color: #2c3e50;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     font-size: 1.5rem;
+    font-weight: 600;
+    position: relative;
+    display: inline-block;
+}
+
+.testimonial-content h3::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 2px;
+    background: var(--primary-color);
 }
 
 .testimonial-content p {
     color: #666;
     font-size: 1.1rem;
-    line-height: 1.6;
+    line-height: 1.8;
     font-style: italic;
     max-width: 800px;
     margin: 0 auto;
+    position: relative;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .testimonial-content {
+        padding: 2rem;
+        margin: 1.5rem auto;
+    }
+
+    .testimonial-content::before {
+        font-size: 4rem;
+        top: 15px;
+        left: 20px;
+    }
+
+    .testimonial h2 {
+        font-size: 1.8rem;
+    }
+
+    .testimonial-content h3 {
+        font-size: 1.3rem;
+    }
+
+    .testimonial-content p {
+        font-size: 1rem;
+    }
 }
 
 /* Large Screen Adjustments */
@@ -1928,29 +2003,80 @@ html {
 .testimonial h2 {
     margin-bottom: 2rem;
     color: #333;
-    font-size: 2rem;
+    font-size: 2.2rem;
+    font-weight: 600;
+    position: relative;
+    display: inline-block;
+}
+
+.testimonial h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--primary-color);
 }
 
 .testimonial-content {
     max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem;
+    margin: 2rem auto;
+    padding: 2.5rem;
     background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonial-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+}
+
+.testimonial-content::before {
+    content: '"';
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    font-size: 5rem;
+    color: var(--primary-color);
+    opacity: 0.1;
+    font-family: serif;
+    line-height: 1;
 }
 
 .testimonial-content h3 {
     color: #2c3e50;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     font-size: 1.5rem;
+    font-weight: 600;
+    position: relative;
+    display: inline-block;
+}
+
+.testimonial-content h3::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 2px;
+    background: var(--primary-color);
 }
 
 .testimonial-content p {
     color: #666;
     font-size: 1.1rem;
-    line-height: 1.6;
+    line-height: 1.8;
     font-style: italic;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
 }
 
 /* Products Page Text Alignment */

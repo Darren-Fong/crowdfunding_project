@@ -669,10 +669,14 @@ function enableDevMode() {
                 console.error('Invalid amount. Please provide a positive number.');
                 return;
             }
-            totalPledged = amount;
-            localStorage.setItem('totalPledged', totalPledged);
-            await updateProgress();
-            console.log(`Progress updated to HK$${amount.toLocaleString()}`);
+            try {
+                // Use updateDatabase to ensure data syncs across pages
+                const result = await updateDatabase(amount, { name: 'Dev Mode', isDevUpdate: true });
+                console.log(`Progress updated to HK$${amount.toLocaleString()}`);
+                return result;
+            } catch (error) {
+                console.error('Error updating progress:', error);
+            }
         },
 
         addBacker: async function(name, amount) {
@@ -681,8 +685,9 @@ function enableDevMode() {
                 return;
             }
             try {
-                await updateDatabase(amount, { name });
+                const result = await updateDatabase(amount, { name });
                 console.log(`Added backer: ${name} (HK$${amount.toLocaleString()})`);
+                return result;
             } catch (error) {
                 console.error('Error adding backer:', error);
             }
@@ -697,14 +702,20 @@ function enableDevMode() {
                         'Accept': 'application/json'
                     },
                     body: JSON.stringify({ 
-                        amount: 0,
-                        backer: { name: 'System', clear: true }
+                        clearBackers: true,
+                        backer: { name: 'Dev Mode', isDevUpdate: true }
                     })
                 });
+                
+                if (!response.ok) {
+                    throw new Error(`Server error: ${response.status}`);
+                }
+                
                 const data = await response.json();
                 if (data && data.backers) {
-                    updateBackersList([]);
+                    updateBackersList(data.backers);
                     console.log('Backers list cleared');
+                    return data;
                 }
             } catch (error) {
                 console.error('Error clearing backers:', error);

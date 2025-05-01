@@ -2387,4 +2387,84 @@ html {
     .privacy-policy .container {
         padding: 0 15px;
     }
+}
+
+/* Terms and Conditions Page Styles */
+.terms {
+    padding: 100px 0 40px;
+    background-color: #fff;
+}
+
+.terms .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.terms h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #1d1d1f;
+}
+
+.terms .last-updated {
+    color: #6e6e73;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+}
+
+.terms h2 {
+    font-size: 1.5rem;
+    margin: 2rem 0 1rem;
+    color: #1d1d1f;
+}
+
+.terms h3 {
+    font-size: 1.2rem;
+    margin: 1.5rem 0 1rem;
+    color: #1d1d1f;
+}
+
+.terms p {
+    margin-bottom: 1rem;
+    line-height: 1.5;
+    color: #1d1d1f;
+}
+
+.terms ul {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.terms li {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+    color: #1d1d1f;
+}
+
+.terms a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+.terms a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .terms {
+        padding: 80px 0 40px;
+    }
+
+    .terms h1 {
+        font-size: 2rem;
+    }
+
+    .terms h2 {
+        font-size: 1.3rem;
+    }
+
+    .terms h3 {
+        font-size: 1.1rem;
+    }
 } 
